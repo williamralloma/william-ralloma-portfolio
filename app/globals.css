@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light mode tokens */
+  --bg: #f8fafc;
+  --bg-elevated: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f1f5f9;
+  --border: #e2e8f0;
+  --text: #001d3d;
+  --text-muted: #475569;
+  --accent: #003566;
+  --gold: #ffc300;
+  --gold-bright: #ffd60a;
+}
+
+.dark {
+  /* Dark mode tokens */
+  --bg: #000814;
+  --bg-elevated: #001d3d;
+  --surface: #001d3d;
+  --surface-2: #003566;
+  --border: rgba(0, 53, 102, 0.55);
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --accent: #ffd60a;
+  --gold: #ffc300;
+  --gold-bright: #ffd60a;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Smooth, scoped theme transitions (avoid transitioning transforms) */
+body,
+.theme-transition,
+.theme-transition * {
+  transition:
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    color 0.3s ease,
+    box-shadow 0.4s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  body,
+  .theme-transition,
+  .theme-transition * {
+    transition: none !important;
+  }
+}
+
+@layer components {
+  .container-px {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  .surface-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    @apply rounded-2xl shadow-soft;
+  }
+
+  .glass-panel {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--surface) 88%, transparent),
+      color-mix(in srgb, var(--surface) 70%, transparent)
+    );
+    border: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    @apply rounded-2xl;
+  }
+
+  .section-label {
+    @apply inline-flex items-center gap-2 font-display text-sm font-medium tracking-wide;
+    color: var(--text-muted);
+  }
+
+  .section-label-num {
+    color: var(--gold);
+    @apply font-semibold;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 font-display text-sm font-semibold transition-all duration-200;
+    background-image: linear-gradient(135deg, #ffc300, #ffd60a);
+    color: #000814;
+  }
+  .btn-primary:hover {
+    @apply -translate-y-0.5 shadow-glow;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 font-display text-sm font-semibold transition-all duration-200;
+    background-color: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .btn-secondary:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    @apply -translate-y-0.5;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium;
+    background-color: var(--surface-2);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+}
+
+/* Gradient text helper */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #ffc300, #ffd60a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Pause marquee on hover */
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Custom selection */
+::selection {
+  background: rgba(255, 195, 0, 0.3);
+  color: var(--text);
+}
