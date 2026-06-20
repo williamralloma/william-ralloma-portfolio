@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const isGithubPages = process.env.DEPLOY_TARGET === 'github-pages';
 const repo = 'william-ralloma-portfolio';
 
 const nextConfig = {
@@ -7,8 +8,12 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: `/${repo}`,
-  assetPrefix: `/${repo}/`,
+  ...(isGithubPages
+    ? {
+        basePath: `/${repo}`,
+        assetPrefix: `/${repo}/`,
+      }
+    : {}),
 };
 
 export default nextConfig;
